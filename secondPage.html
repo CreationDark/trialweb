@@ -13,11 +13,17 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f4f4f9;
+            background: url('1.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 10px;
         }
         h1 {
             font-size: 3em;
-            color: #333;
             margin-bottom: 20px;
         }
         .buttons-container {
@@ -43,14 +49,14 @@
     </style>
 </head>
 <body>
-    <h1>Welcome</h1>
-    <div class="buttons-container">
-        <a href="thirdPage.html?choice=option1" class="button">Option 1</a>
-        <a href="thirdPage.html?choice=option2" class="button">Option 2</a>
-        <a href="thirdPage.html?choice=option3" class="button">Option 3</a>
-        <a href="thirdPage.html?choice=option4" class="button">Option 4</a>
-        <a href="thirdPage.html?choice=option4" class="button">Option 5</a>
-        <a href="thirdPage.html?choice=option4" class="button">Option 6</a>
+    <div class="container">
+        <h1>Welcome</h1>
+        <div class="buttons-container">
+            <a href="thirdPage.html?choice=option1" class="button">Option 1</a>
+            <a href="thirdPage.html?choice=option2" class="button">Option 2</a>
+            <a href="thirdPage.html?choice=option3" class="button">Option 3</a>
+            <a href="thirdPage.html?choice=option4" class="button">Option 4</a>
+        </div>
     </div>
 </body>
 </html>
