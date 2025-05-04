@@ -1,12 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
+    <!-- (existing head content) -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Second Page</title>
+    <title>Görme Engelliler İçin Kampüs Yönlendirme Sistemi</title>
+    <style>
+        /* (existing CSS, unchanged) */
+        /* Your CSS from the previous post can just remain here. */
+    </style>
 </head>
 <body>
-    <h1>You've Chosen Your Poison!</h1>
-    <p>This is the second page. You can add content here.</p>
+    <h1>Görme Engelliler İçin Kampüs Yönlendirme Sistemi</h1>
+    
+    <div class="container">
+        <p style="font-size: 18px;">Bu sistem, kampüs içerisinde sesli komutlarla yönlendirme yapmanızı sağlar. Ekrana dokunarak veya boşluk tuşuna basarak konuşmaya başlayabilirsiniz.</p>
+        
+        <div class="controls">
+            <button id="bluetoothBtn" style="width: 80%;">Bluetooth Bağlan</button>
+            <button id="startBtn" style="width: 80%;">KONUŞMAYA BAŞLA</button>
+            <button id="stopBtn" disabled style="width: 80%;">DURDUR</button>
+        </div>
+
+        <div id="bluetoothOutput" class="output" style="font-size:16px; color:#333;">Bluetooth durumu: Henüz bir cihaza bağlanılmadı.</div>
+        
+        <div id="status" class="status">Hazır</div>
+        
+        <div>
+            <p style="font-size: 18px;">Algılanan Komut:</p>
+            <div id="result" class="output">Henüz bir komut algılanmadı.</div>
+        </div>
+        
+        <div>
+            <p style="font-size: 18px;">Sistem Yanıtı:</p>
+            <div id="response" class="output">Nereye gitmek istediğinizi sorun. Örneğin: "Mühendislik binasına nasıl giderim?"</div>
+        </div>
+    </div>
+    
+    <!-- (commands list unchanged) -->
+    <div class="container command-list">
+        <!-- (existing command list) -->
+        <h2>Kullanılabilir Komutlar</h2>
+        <ul>
+            <li><span class="command-keyword">Üniversite girişindeyim beni [BINA ADI] binasına götür</span> - Size yol tarifi verilecek</li>
+            <li><span class="command-keyword">Neredeyim</span> - Bulunduğunuz konumu söyleyecek</li>
+            <li><span class="command-keyword">En yakın [MEKAN] nerede</span> - En yakın mekanın yerini söyleyecek</li>
+            <li><span class="command-keyword">Yardım</span> - Kullanılabilir komutları listeleyecek</li>
+            <li><span class="command-keyword">Acil durum</span> - Acil durum yardımını arayacak</li>
+        </ul>
+    </div>
+
+    <script>
+        // --- BLUETOOTH BUTTON LOGIC ---
+        const bluetoothBtn = document.getElementById('bluetoothBtn');
+        const bluetoothOutput = document.getElementById('bluetoothOutput');
+
+        bluetoothBtn.addEventListener('click', async () => {
+            bluetoothOutput.textContent = 'Bluetooth cihazı aranıyor...';
+            try {
+                const device = await navigator.bluetooth.requestDevice({
+                    acceptAllDevices: true,
+                    // optionalServices: ['battery_service'] // örnek bir servis
+                });
+                bluetoothOutput.textContent = `Bağlanıldı: ${device.name || "Bilinmeyen cihaz"} (ID: ${device.id})`;
+
+                if (device.gatt) {
+                    const server = await device.gatt.connect();
+                    bluetoothOutput.textContent += '\nGATT bağlantısı kuruldu!';
+                }
+            } catch (error) {
+                bluetoothOutput.textContent = 'Bluetooth bağlantı hatası: ' + error;
+            }
+        });
+
+        // --- (EXISTING JS CODE UNCHANGED, paste it here, or leave as is) ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... bütün eski script'iniz ...
+            // (No changes are needed for speech code)
+            // (Paste or keep your previous large script here)
+        });
+    </script>
 </body>
 </html>
